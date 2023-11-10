@@ -37,7 +37,7 @@ function signUp($data) {
     }
 
     $password = password_hash($password, PASSWORD_DEFAULT);
-    
+
     mysqli_query($conn, "INSERT INTO users (firstName, lastName, email, password, role) VALUES ('$firstName', '$lastName', '$email', '$password', '$role')");
     
     return mysqli_affected_rows($conn);
