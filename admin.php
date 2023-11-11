@@ -13,6 +13,8 @@ if ($_SESSION['role'] !== 'Admin') {
 }
 
 $user = query("SELECT * FROM users WHERE role = 'User'");
+
+$movie = query("SELECT * FROM movies")
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +54,40 @@ $user = query("SELECT * FROM users WHERE role = 'User'");
             </tr>
             <?php $i++; ?>
         <?php endforeach; ?>
-    </table>
+    </table><br><br>
+
+    <h3>Table Movies</h3>
+    <a href="movie/addMovie.php">Add Movie</a><br><br>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Synopsis</th>
+            <th>Release Year</th>
+            <th>Director</th>
+            <th>Picture</th>
+            <th>Action</th>
+        </tr>
+
+        <?php $i = 1; ?>
+        <?php foreach ($movie as $row) : ?>
+            <tr>
+                <td><?= $i; ?></td>
+                <td><?= $row['title']; ?></td>
+                <td><?= $row['synopsis']; ?></td>
+                <td><?= $row['year']; ?></td>
+                <td><?= $row['director']; ?></td>
+                <td>
+                    <img src="./assets/upload/images/<?= $row['picture'] ?>" width="75">
+                </td>
+                <td>
+                    <a href="movie/editMovie.php?id=<?= $row['id']; ?>">Edit</a>|
+                    <a href="movie/deleteMovie.php?id=<?= $row['id']; ?>">Delete</a>
+                </td>
+            </tr>
+            <?php $i++; ?>
+        <?php endforeach; ?>
+    </table><br><br>
 
     <a href="signOut.php">Sign Out</a>
 </body>
