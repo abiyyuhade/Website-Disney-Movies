@@ -47,7 +47,9 @@ if (isset($_POST['signUp'])) {
         <label for="confPassword">Confirm Password</label>
         <input type="password" name="confPassword" id="confPassword" required>
 
-        <button type="submit" name="signUp">Sign Up</button>
+        <button type="submit" name="signUp">Sign Up</button> <br><br>
+
+        <a href="signIn.php">Sign In</a>
     </form>
 </body>
 

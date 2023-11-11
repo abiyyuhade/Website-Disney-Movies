@@ -6,6 +6,16 @@ $db = 'db_disney';
 
 $conn = mysqli_connect($host, $username, $password, $db) or die ("Not Connected Yet!");
 
+function query($query) {
+    global $conn;
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
 function signUp($data) {
     global $conn;
 
@@ -40,6 +50,27 @@ function signUp($data) {
 
     mysqli_query($conn, "INSERT INTO users (firstName, lastName, email, password, role) VALUES ('$firstName', '$lastName', '$email', '$password', '$role')");
     
+    return mysqli_affected_rows($conn);
+}
+
+function editUser($data) {
+    global $conn;
+
+    $id = $data['id'];
+    $email = $data['email'];
+    $firstName = $data['firstName'];
+    $lastName = $data['lastName'];
+
+    $query = "UPDATE users SET email = '$email', firstName = '$firstName', lastName = '$lastName' WHERE id = '$id'";
+    mysqli_query($conn, $query);
+    
+    return mysqli_affected_rows($conn);
+}
+
+function deleteUser($id) {
+    global $conn;
+    mysqli_query($conn, "DELETE FROM users WHERE id = '$id'");
+
     return mysqli_affected_rows($conn);
 }
 

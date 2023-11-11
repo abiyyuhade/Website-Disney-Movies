@@ -12,7 +12,7 @@ if(isset($_POST['signIn'])) {
         $row = mysqli_fetch_assoc($result);
 
         if (password_verify($password, $row['password'])) {
-            $_SESSION['login'] = true;
+            $_SESSION['signedIn'] = true;
             $_SESSION['role'] = $row['role'];
 
             if ($row['role'] === 'Admin') {
@@ -47,7 +47,9 @@ if(isset($_POST['signIn'])) {
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
 
-        <button type="submit" name="signIn">Sign In</button>
+        <button type="submit" name="signIn">Sign In</button> <br> <br>
+
+        <a href="signUp.php">Sign Up</a>
     </form>
 </body>
 
