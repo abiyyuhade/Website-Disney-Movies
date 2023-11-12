@@ -54,7 +54,7 @@ if(isset($_POST['editMovie'])) {
         
         <!-- Current Picture -->
         <label for="currentPicture">Current Picture</label>
-        <img src="../assets/upload/images/<?= $data['picture']; ?>" alt="" width="75"><br><br>
+        <img src="../assets/upload/images/<?= $data['picture']; ?>" alt="" id="currentPicture" width="75"><br><br>
         
 
         <!-- Picture -->

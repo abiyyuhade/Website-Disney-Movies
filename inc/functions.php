@@ -170,8 +170,59 @@ function deleteMovie($id) {
     unlink('../assets/upload/images/' . $file["picture"]);
 
     $delete = "DELETE FROM movies WHERE id = $id";
-
     mysqli_query($conn, $delete);
+
+    return mysqli_affected_rows($conn);
+}
+
+function addCaster($data) {
+    global $conn;
+
+    $name = $data['name'];
+    $movie = $data['movie'];
+    
+    $picture = uploadPicture();
+    if(!$picture) {
+        return false;
+    }
+
+    $query = "INSERT INTO casters (name, picture, id_movies) VALUES  ('$name', '$picture' , '$movie')";
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function editCaster($data) {
+    global $conn;
+
+    $id = $data['id'];
+    $name = $data['name'];
+    $movie = $data['movie'];
+
+    $picture = uploadPicture();
+
+    if (!$picture) {
+        $result = query("SELECT picture FROM casters WHERE id = '$id'");
+        $picture = $result[0]['picture'];
+    }
+
+    $query = "UPDATE casters SET name = '$name', id_movies = $movie, picture = '$picture' WHERE id = '$id'";
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function deleteCaster($id) {
+    global $conn;
+    $id = mysqli_real_escape_string($conn, $id);
+
+    $file = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM casters WHERE id='$id'"));
+
+    unlink('../assets/upload/images/' . $file["picture"]);
+
+    $delete = "DELETE FROM casters WHERE id = $id";
+    mysqli_query($conn, $delete);
+
     return mysqli_affected_rows($conn);
 }
 ?>
