@@ -1,8 +1,8 @@
-<?php 
+<?php
 session_start();
 include "inc/functions.php";
 
-if(isset($_POST['signIn'])) {
+if (isset($_POST['signIn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -30,28 +30,33 @@ if(isset($_POST['signIn'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <title>Document</title>
-        <style>
-            body {
-                background: linear-gradient(to top right, #474e9c 30%, #e387b8 70%);
-            }
-            input {
-                background-color: transparent;
-            }
-            input::placeholder {
-                color: white !important;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex text-white">
-            <div class="w-[50%]">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+    <style>
+        body {
+            background: linear-gradient(to top right, #474e9c 30%, #e387b8 70%);
+        }
+
+        input {
+            background-color: transparent;
+        }
+
+        input::placeholder {
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex text-white">
+        <div class="w-[50%]">
+            <form action="" method="post">
                 <div class="w-[60%] p-4 mx-auto mt-[15%] flex flex-col">
-                    <img src="disney-logo-white.png" alt="" class="h-16 object-contain mt-4" />
+                    <img src="assets/images/disney-logo-white.png" alt="" class="h-16 object-contain mt-4" />
                     <div class="font-bold text-white text-center text-5xl">Welcome Back!</div>
                     <p class="text-center text-lg mb-4 text-gray-100">Sign in for timeless tales and magical wonders.</p>
                     <p class="font-bold text-xl mt-4 mb-2">Email</p>
@@ -64,10 +69,12 @@ if(isset($_POST['signIn'])) {
                         <p class="text-[#474e9c]">Sign Up</p>
                     </div>
                 </div>
-            </div>
-            <div class="w-[50%]">
-                <img src="disney-img.png" alt="" class="mt-16 mb-[30%] h-[45em]" />
-            </div>
+            </form>
         </div>
-    </body>
+        <div class="w-[50%]">
+            <img src="assets/images/disney-img.png" alt="" class="mt-16 mb-[30%] h-[45em]" />
+        </div>
+    </div>
+</body>
+
 </html>
