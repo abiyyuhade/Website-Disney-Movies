@@ -114,7 +114,8 @@ if (isset($_POST['signUp'])) {
                     <button class="button1" name="signUp">Sign Up</button>
                     <div style="display: flex; margin-top: 1rem; height: fit-content; margin-left: auto; margin-right: auto">
                         <p style="color: #d9dae5; margin-left: 1rem">already have an account? </p>
-                        <p style="color: #dac0ff"> Sign In</p>
+                        <a href="signIn.php" style="color: #dac0ff; text-decoration: none; margin-top: 16px;">Sign In</a>
+                        <!-- <p style="color: #dac0ff"> Sign In</p> -->
                     </div>
                 </div>
             </form>

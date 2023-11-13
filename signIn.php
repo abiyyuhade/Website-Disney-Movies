@@ -123,7 +123,8 @@ if (isset($_POST['signIn'])) {
                     <button class="button1" name="signIn">Sign In</button>
                     <div style="display: flex; margin-top: 1rem; height: fit-content; margin-left: auto; margin-right: auto">
                         <p style="color: #d9dae5; margin-right: 1rem">Don't have an account yet?</p>
-                        <p style="color: #dac0ff">Sign Up</p>
+                        <a href="signUp.php" style="color: #dac0ff; text-decoration: none; margin-top: 16px;">Sign Up</a>
+                        <!-- <p style="color: #dac0ff">Sign Up</p> -->
                     </div>
             </form>
         </div>
