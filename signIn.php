@@ -62,7 +62,7 @@ if (isset($_POST['signIn'])) {
                     <p class="font-bold text-xl mt-4 mb-2">Email</p>
                     <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2" name="email" placeholder="Input your email" />
                     <p class="font-bold text-xl mt-4 mb-2">Password</p>
-                    <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2" name="password" placeholder="Password" />
+                    <input type="password" class="border-[2px] border-white rounded-lg h-12 ps-2" name="password" placeholder="Password" />
                     <button class="mt-16 bg-white text-[#474e9c] font-bold p-2 text-xl rounded-md" name="signIn">Sign In</button>
                     <div class="flex mt-4 h-fit mx-auto">
                         <p class="me-2 text-[#d9dae5]">Don't have an account yet?</p>
