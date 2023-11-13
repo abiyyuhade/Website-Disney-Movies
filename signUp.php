@@ -2,7 +2,7 @@
 include "inc/functions.php";
 
 if (isset($_POST['signUp'])) {
-    if(signUp($_POST) > 0) {
+    if (signUp($_POST) > 0) {
         echo "
             <script>
                 alert('Successfully Create a New User');
@@ -18,55 +18,111 @@ if (isset($_POST['signUp'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <title>Document</title>
-        <style>
-            body {
-                background: linear-gradient(to top right, #474e9c, #e387b8);
-            }
-            input {
-                background-color: transparent;
-            }
-            input::placeholder {
-                color: white !important;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex text-white">
-            <div class="w-[50%]">
-                <div class="w-[60%] p-4 mx-auto mt-16 flex flex-col">
-                    <img src="disney-logo-white.png" alt="" class="h-16 object-contain mt-4" />
-                    <div class="font-medium text-white text-center text-4xl mb-4">Sign Up to Your Account</div>
-                    <div class="flex justify-between">
-                        <div class="w-[50%]">
-                            <p class="font-bold text-xl mb-2">First Name</p>
-                            <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2" name="firstName" placeholder="Input your first name" />
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+            background: linear-gradient(to top right, #474e9c 30%, #e387b8 70%);
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+        input {
+            background-color: transparent;
+            border-radius: 0.5rem;
+            border: solid 2px white;
+            height: 3rem;
+            padding-left: 1rem;
+        }
+
+        input::placeholder {
+            color: white !important;
+            text-indent: 10px;
+        }
+
+        .container1 {
+            display: flex;
+            padding: 1rem;
+            flex-direction: column;
+            width: 60%;
+            margin-top: 15%;
+            margin-left: auto;
+        }
+
+        .image1 {
+            object-fit: contain;
+            margin-top: 1rem;
+            height: 4rem;
+        }
+
+        .text1 {
+            margin-bottom: 1rem;
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 500;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .text2 {
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 700;
+        }
+
+        .button1 {
+            padding: 0.5rem;
+            margin-top: 4rem;
+            border-radius: 0.375rem;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 700;
+            background: #ffffff;
+            color: #474e9c;
+            box-shadow: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex; color: #ffffff">
+        <div style="width: 50%">
+            <form action="" method="post">
+                <div class="container1">
+                    <img src="assets/images/disney-logo-white.png" alt="" class="image1" />
+                    <div class="text1">Sign Up to Your Account</div>
+                    <div style="display: flex; justify-content: space-between">
+                        <div style="width: 50%">
+                            <p style="margin-bottom: 0.5rem; font-size: 1.25rem; line-height: 1.75rem; font-weight: 700">First Name</p>
+                            <input type="text" name="firstName" placeholder="Input your first name" />
                         </div>
-                        <div class="w-[50%]">
-                            <p class="font-bold text-xl mb-2">Last Name</p>
-                            <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2 w-full" name="lastName" placeholder="Input your last name" />
+                        <div style="width: 50%">
+                            <p style="margin-bottom: 0.5rem; font-size: 1.25rem; line-height: 1.75rem; font-weight: 700">Last Name</p>
+                            <input type="text" style="width: 90%" name="lastName" placeholder="Input your last name" />
                         </div>
                     </div>
-                    <p class="font-bold text-xl mt-4 mb-2">Email</p>
-                    <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2" name="email" placeholder="Input your email" />
-                    <p class="font-bold text-xl mt-4 mb-2">Password</p>
-                    <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2" name="password" placeholder="Password" />
-                    <p class="font-bold text-xl mt-4 mb-2">Confirm Password</p>
-                    <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2" name="confPassword" placeholder="Confirm Password" />
-                    <button class="mt-16 bg-[#474e9c] text-white font-bold p-2 text-xl rounded-md" name="signUp">Sign Up</button>
-                    <div class="flex mt-4 h-fit mx-auto">
-                        <p class="me-2 text-[#d9dae5]">already have an account?</p>
-                        <p class="text-[#474e9c]">Sign In</p>
+                    <p class="text2">Email</p>
+                    <input type="text" name="email" placeholder="Input your email" />
+                    <p class="text2">Password</p>
+                    <input type="password" name="password" placeholder="Password" />
+                    <p class="text2">Confirm Password</p>
+                    <input type="password" name="confPassword" placeholder="Confirm Password" />
+                    <button class="button1" name="signUp">Sign Up</button>
+                    <div style="display: flex; margin-top: 1rem; height: fit-content; margin-left: auto; margin-right: auto">
+                        <p style="color: #d9dae5; margin-left: 1rem">already have an account? </p>
+                        <p style="color: #dac0ff"> Sign In</p>
                     </div>
                 </div>
-            </div>
-            <div class="w-[50%]">
-                <img src="disney-img.png" alt="" class="mt-16 mb-[30%] h-[45em]" />
-            </div>
+            </form>
         </div>
-    </body>
+        <div style="width: 50%; margin-left: 6rem; margin-top: 4rem">
+            <img src="assets/images/disney-img.png" alt="" style="margin-top: 4rem; margin-bottom: 30%; height: 45em" />
+        </div>
+    </div>
+</body>
+
 </html>
