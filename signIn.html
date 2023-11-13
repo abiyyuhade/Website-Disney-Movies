@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Document</title>
+        <style>
+            body {
+                background: linear-gradient(to top right, #474e9c 30%, #e387b8 70%);
+            }
+            input {
+                background-color: transparent;
+            }
+            input::placeholder {
+                color: white !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="flex text-white">
+            <div class="w-[50%]">
+                <div class="w-[60%] p-4 mx-auto mt-[15%] flex flex-col">
+                    <img src="disney-logo-white.png" alt="" class="h-16 object-contain mt-4" />
+                    <div class="font-bold text-white text-center text-5xl">Welcome Back!</div>
+                    <p class="text-center text-lg mb-4 text-gray-100">Sign in for timeless tales and magical wonders.</p>
+                    <p class="font-bold text-xl mt-4 mb-2">Email</p>
+                    <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2" placeholder="Input your email" />
+                    <p class="font-bold text-xl mt-4 mb-2">Password</p>
+                    <input type="text" class="border-[2px] border-white rounded-lg h-12 ps-2" placeholder="Password" />
+                    <button class="mt-16 bg-white text-[#474e9c] font-bold p-2 text-xl rounded-md">Sign In</button>
+                    <div class="flex mt-4 h-fit mx-auto">
+                        <p class="me-2 text-[#d9dae5]">Don't have an account yet?</p>
+                        <p class="text-[#474e9c]">Sign Up</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-[50%]">
+                <img src="disney-img.png" alt="" class="mt-16 mb-[30%] h-[45em]" />
+            </div>
+        </div>
+    </body>
+</html>
