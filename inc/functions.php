@@ -231,7 +231,8 @@ function deleteMovie($id) {
 
     $file = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM movies WHERE id='$id'"));
 
-    unlink('../assets/upload/images/' . $file["picture"]);
+    unlink('../assets/upload/images/' . $file["thumbnail"]);
+    unlink('../assets/upload/images/' . $file["banner"]);
 
     $delete = "DELETE FROM movies WHERE id = $id";
     mysqli_query($conn, $delete);
