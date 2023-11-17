@@ -23,6 +23,7 @@ $movie = query("SELECT * FROM movies");
             margin: 0;
             padding: 0;
         }
+
         body {
             margin: 0;
             padding: 0;
@@ -75,7 +76,7 @@ $movie = query("SELECT * FROM movies");
             <p style="font-weight: bold; color: white; font-size: 2.5rem; text-align: center">Explore Disney's</p>
             <p style="font-weight: bold; color: white; font-size: 2.5rem; text-align: center">Enchanting Universe</p>
             <p style="font-weight: 500; color: white; font-size: 1.25rem; text-align: center; margin-top: 2em">Welcome to the magical hub where enchanting stories unfold</p>
-            <button style="font-weight: bold; font-size: 1rem; border-radius: 0.25rem; color: white; border: 2px solid white; display: inline-block; padding-left: 2rem; padding-right: 2rem; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0 auto; margin-top: 3em">Get Started</button>
+            <button onclick="scrollToMovies()" style="font-weight: bold; font-size: 1rem; border-radius: 0.25rem; color: white; border: 2px solid white; display: inline-block; padding-left: 2rem; padding-right: 2rem; padding-top: 0.5rem; padding-bottom: 0.5rem; margin: 0 auto; margin-top: 3em">Get Started</button>
         </div>
     </div>
     <div style="height: 80em; background-color: #474e9c; display: flex; flex-direction: column">
@@ -102,7 +103,7 @@ $movie = query("SELECT * FROM movies");
         </div>
 
 
-        <div style="display: flex; flex-wrap: wrap; margin-top: 4rem; padding-left: 2rem; padding-right: 2rem" id="movieContainer">
+        <div id="movieList" style="display: flex; flex-wrap: wrap; margin-top: 4rem; padding-left: 2rem; padding-right: 2rem" id="movieContainer">
             <?php foreach ($movie as $row) : ?>
                 <div class="movie" style="width: 12em; height: 22em; margin: 1.5em">
                     <a href="detail.php?id=<?= $row['id']; ?>">
@@ -208,6 +209,13 @@ $movie = query("SELECT * FROM movies");
                     cards[i].style.display = "none";
                 }
             }
+        }
+
+        function scrollToMovies() {
+            const movieList = document.getElementById('movieList');
+            movieList.scrollIntoView({
+                behavior: 'smooth'
+            });
         }
     </script>
 </body>
