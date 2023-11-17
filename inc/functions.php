@@ -98,52 +98,6 @@ function addMovie($data) {
     return mysqli_affected_rows($conn);
 }
 
-function uploadPicture() {
-    $fileName = $_FILES['picture']['name'];
-    $fileSize = $_FILES['picture']['size'];
-    $error = $_FILES['picture']['error'];
-    $tmpName = $_FILES['pictture']['tmp_name'];
-
-    if($error !== 0) {
-        echo "
-            <script>
-                alert('Error uploading image');
-            </script>
-        ";
-        return false;
-    }
-
-    $extensionValidPict = ['jpg', 'jpeg', 'png'];
-    $extPict = pathinfo($fileName, PATHINFO_EXTENSION);
-    $extPictFix = strtolower($extPict);
-
-    if(!in_array($extPictFix, $extensionValidPict)) {
-        echo "
-            <script>
-                alert('Invalid image format. Please upload a JPG, JPEG, or PNG file.');
-            </script>
-        ";
-        return false;
-    }
-
-    if($fileSize > 10000000) {
-        echo "
-            <script>
-                alert('The image its to large.');
-            </script>
-        ";
-        return false;
-    }
-
-    $newFileName = uniqid();
-    $newFileName .= '.';
-    $newFileName .= $extPictFix;
-
-    move_uploaded_file($tmpName, '../assets/upload/images/' . $newFileName);
-
-    return $newFileName;
-}
-
 function uploadThumbnail() {
     $fileName = $_FILES['thumbnail']['name'];
     $fileSize = $_FILES['thumbnail']['size'];
@@ -302,6 +256,53 @@ function addCaster($data) {
     return mysqli_affected_rows($conn);
 }
 
+function uploadPicture() {
+    $fileName = $_FILES['picture']['name'];
+    $fileSize = $_FILES['picture']['size'];
+    $error = $_FILES['picture']['error'];
+    $tmpName = $_FILES['picture']['tmp_name'];
+
+    if($error !== 0) {
+        echo "
+            <script>
+                alert('Error uploading image');
+            </script>
+        ";
+        return false;
+    }
+
+    $extensionValidPict = ['jpg', 'jpeg', 'png'];
+    $extPict = pathinfo($fileName, PATHINFO_EXTENSION);
+    $extPictFix = strtolower($extPict);
+
+    if(!in_array($extPictFix, $extensionValidPict)) {
+        echo "
+            <script>
+                alert('Invalid image format. Please upload a JPG, JPEG, or PNG file.');
+            </script>
+        ";
+        return false;
+    }
+
+    if($fileSize > 10000000) {
+        echo "
+            <script>
+                alert('The image its to large.');
+            </script>
+        ";
+        return false;
+    }
+
+    $newFileName = uniqid();
+    $newFileName .= '.';
+    $newFileName .= $extPictFix;
+
+    move_uploaded_file($tmpName, '../assets/upload/images/' . $newFileName);
+
+    return $newFileName;
+}
+
+
 function editCaster($data) {
     global $conn;
 
@@ -309,9 +310,12 @@ function editCaster($data) {
     $name = $data['name'];
     $movie = $data['movie'];
 
-    $picture = uploadPicture();
-
-    if (!$picture) {
+    if ($_FILES['picture']['error'] === 0) {
+        $picture = uploadPicture();
+        if (!$picture) {
+            return false;
+        }
+    } else {
         $result = query("SELECT picture FROM casters WHERE id = '$id'");
         $picture = $result[0]['picture'];
     }
