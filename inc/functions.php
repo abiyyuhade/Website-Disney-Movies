@@ -82,12 +82,17 @@ function addMovie($data) {
     $year = $data['year'];
     $director = $data['director'];
 
-    $picture = uploadPicture();
-    if(!$picture) {
+    $thumbnail = uploadThumbnail();
+    if(!$thumbnail) {
         return false;
     }
 
-    $query = "INSERT INTO movies (title, synopsis, year, director, picture) VALUES ('$title', '$synopsis', '$year', '$director', '$picture')";
+    $banner = uploadBanner();
+    if(!$banner) {
+        return false;
+    }
+
+    $query = "INSERT INTO movies (title, synopsis, year, director, thumbnail, banner) VALUES ('$title', '$synopsis', '$year', '$director', '$thumbnail', '$banner')";
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
@@ -97,7 +102,99 @@ function uploadPicture() {
     $fileName = $_FILES['picture']['name'];
     $fileSize = $_FILES['picture']['size'];
     $error = $_FILES['picture']['error'];
-    $tmpName = $_FILES['picture']['tmp_name'];
+    $tmpName = $_FILES['pictture']['tmp_name'];
+
+    if($error !== 0) {
+        echo "
+            <script>
+                alert('Error uploading image');
+            </script>
+        ";
+        return false;
+    }
+
+    $extensionValidPict = ['jpg', 'jpeg', 'png'];
+    $extPict = pathinfo($fileName, PATHINFO_EXTENSION);
+    $extPictFix = strtolower($extPict);
+
+    if(!in_array($extPictFix, $extensionValidPict)) {
+        echo "
+            <script>
+                alert('Invalid image format. Please upload a JPG, JPEG, or PNG file.');
+            </script>
+        ";
+        return false;
+    }
+
+    if($fileSize > 10000000) {
+        echo "
+            <script>
+                alert('The image its to large.');
+            </script>
+        ";
+        return false;
+    }
+
+    $newFileName = uniqid();
+    $newFileName .= '.';
+    $newFileName .= $extPictFix;
+
+    move_uploaded_file($tmpName, '../assets/upload/images/' . $newFileName);
+
+    return $newFileName;
+}
+
+function uploadThumbnail() {
+    $fileName = $_FILES['thumbnail']['name'];
+    $fileSize = $_FILES['thumbnail']['size'];
+    $error = $_FILES['thumbnail']['error'];
+    $tmpName = $_FILES['thumbnail']['tmp_name'];
+
+    if($error !== 0) {
+        echo "
+            <script>
+                alert('Error uploading image');
+            </script>
+        ";
+        return false;
+    }
+
+    $extensionValidPict = ['jpg', 'jpeg', 'png'];
+    $extPict = pathinfo($fileName, PATHINFO_EXTENSION);
+    $extPictFix = strtolower($extPict);
+
+    if(!in_array($extPictFix, $extensionValidPict)) {
+        echo "
+            <script>
+                alert('Invalid image format. Please upload a JPG, JPEG, or PNG file.');
+            </script>
+        ";
+        return false;
+    }
+
+    if($fileSize > 10000000) {
+        echo "
+            <script>
+                alert('The image its to large.');
+            </script>
+        ";
+        return false;
+    }
+
+    $newFileName = uniqid();
+    $newFileName .= '.';
+    $newFileName .= $extPictFix;
+
+    move_uploaded_file($tmpName, '../assets/upload/images/' . $newFileName);
+
+    return $newFileName;
+}
+
+function uploadBanner() {
+    $fileName = $_FILES['banner']['name'];
+    $fileSize = $_FILES['banner']['size'];
+    $error = $_FILES['banner']['error'];
+    $tmpName = $_FILES['banner']['tmp_name'];
 
     if($error !== 0) {
         echo "
@@ -148,14 +245,27 @@ function editMovie($data) {
     $year = $data['year'];
     $director = $data['director'];
 
-    $picture = uploadPicture();
-
-    if (!$picture) {
-        $result = query("SELECT picture FROM movies WHERE id = '$id'");
-        $picture = $result[0]['picture'];
+    if ($_FILES['thumbnail']['error'] === 0) {
+        $thumbnail = uploadThumbnail();
+        if (!$thumbnail) {
+            return false;
+        }
+    } else {
+        $result = query("SELECT thumbnail FROM movies WHERE id = '$id'");
+        $thumbnail = $result[0]['thumbnail'];
     }
 
-    $query = "UPDATE movies SET title = '$title', synopsis = '$synopsis', year = '$year', director = '$director', picture = '$picture' WHERE id = '$id'";
+    if ($_FILES['banner']['error'] === 0) {
+        $banner = uploadBanner();
+        if (!$banner) {
+            return false;
+        }
+    } else {
+        $result = query("SELECT banner FROM movies WHERE id = '$id'");
+        $banner = $result[0]['banner'];
+    }
+
+    $query = "UPDATE movies SET title = '$title', synopsis = '$synopsis', year = '$year', director = '$director', thumbnail = '$thumbnail', banner = '$banner' WHERE id = '$id'";
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);

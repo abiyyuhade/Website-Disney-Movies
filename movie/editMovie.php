@@ -52,14 +52,21 @@ if(isset($_POST['editMovie'])) {
         <label for="director">Director</label>
         <input type="text" name="director" id="director" value="<?= $data['director']; ?>" autocomplete="off" required><br><br>
         
-        <!-- Current Picture -->
-        <label for="currentPicture">Current Picture</label>
-        <img src="../assets/upload/images/<?= $data['picture']; ?>" alt="" id="currentPicture" width="75"><br><br>
+        <!-- Current Thumbnail -->
+        <label for="currentThumbnail">Current Thumbnail</label>
+        <img src="../assets/upload/images/<?= $data['thumbnail']; ?>" alt="" id="currentThumbnail" width="75"><br><br>
         
+        <!-- Thumbnail -->
+        <label for="thumbnail">Thumbnail</label>
+        <input type="file" name="thumbnail" id="thumbnail"><br><br>
 
-        <!-- Picture -->
-        <label for="picture">Picture</label>
-        <input type="file" name="picture" id="picture"><br><br>
+        <!-- Current Banner -->
+        <label for="currentBanner">Current Banner</label>
+        <img src="../assets/upload/images/<?= $data['banner']; ?>" alt="" id="currentBanner" width="75"><br><br>
+
+        <!-- Banner -->
+        <label for="banner">Banner</label>
+        <input type="file" name="banner" id="banner"><br><br>
 
         <!-- Button Submit -->
         <button type="submit" name="editMovie">Submit</button>

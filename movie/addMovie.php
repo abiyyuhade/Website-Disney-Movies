@@ -45,9 +45,13 @@ if(isset($_POST['addMovie'])) {
         <label for="director">Director</label>
         <input type="text" name="director" id="director" autocomplete="off" required><br><br>
         
-        <!-- Picture -->
-        <label for="picture">Picture</label>
-        <input type="file" name="picture" id="picture"><br><br>
+        <!-- Thumbnail -->
+        <label for="thumbnail">Thumbnail</label>
+        <input type="file" name="thumbnail" id="thumbnail"><br><br>
+
+        <!-- Banner -->
+        <label for="banner">Banner</label>
+        <input type="file" name="banner" id="banner"><br><br>
 
         <!-- Button Submit -->
         <button type="submit" name="addMovie">Submit</button>

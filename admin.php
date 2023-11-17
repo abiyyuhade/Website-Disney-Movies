@@ -12,8 +12,6 @@ if ($_SESSION['role'] !== 'Admin') {
     exit;
 }
 
-$user = query("SELECT * FROM users WHERE role = 'User'");
-
 $movie = query("SELECT * FROM movies");
 
 $caster = query("SELECT casters.*, movies.title AS movie_title FROM casters LEFT JOIN movies ON casters.id_movies = movies.id");
@@ -30,35 +28,6 @@ $caster = query("SELECT casters.*, movies.title AS movie_title FROM casters LEFT
 </head>
 
 <body>
-    <h1>Admin Brok</h1>
-
-    <h3>Table Users</h3>
-    <a href="user/addUser.php">Add Data</a><br><br>
-    <table>
-        <tr>
-            <th>No.</th>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Action</th>
-        </tr>
-
-        <?php $i = 1; ?>
-        <?php foreach ($user as $row) : ?>
-            <tr>
-                <td><?= $i; ?></td>
-                <td><?= $row['email']; ?></td>
-                <td><?= $row['firstName']; ?></td>
-                <td><?= $row['lastName']; ?></td>
-                <td>
-                    <a href="user/editUser.php?id=<?= $row['id']; ?>">Edit</a> |
-                    <a href="user/deleteUser.php?id=<?= $row['id']; ?>" onclick="return confirm('Are you sure?')">Delete</a>
-                </td>
-            </tr>
-            <?php $i++; ?>
-        <?php endforeach; ?>
-    </table><br><br>
-
     <h3>Table Movies</h3>
     <a href="movie/addMovie.php">Add Data</a><br><br>
     <table>
@@ -68,7 +37,8 @@ $caster = query("SELECT casters.*, movies.title AS movie_title FROM casters LEFT
             <th>Synopsis</th>
             <th>Release Year</th>
             <th>Director</th>
-            <th>Picture</th>
+            <th>Thumbnail</th>
+            <th>Banner</th>
             <th>Action</th>
         </tr>
 
@@ -81,7 +51,10 @@ $caster = query("SELECT casters.*, movies.title AS movie_title FROM casters LEFT
                 <td><?= $row['year']; ?></td>
                 <td><?= $row['director']; ?></td>
                 <td>
-                    <img src="assets/upload/images/<?= $row['picture'] ?>" width="75">
+                    <img src="assets/upload/images/<?= $row['thumbnail'] ?>" width="75">
+                </td>
+                <td>
+                    <img src="assets/upload/images/<?= $row['banner'] ?>" width="75">
                 </td>
                 <td>
                     <a href="movie/editMovie.php?id=<?= $row['id']; ?>">Edit</a> |
