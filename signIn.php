@@ -14,6 +14,8 @@ if (isset($_POST['signIn'])) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['signedIn'] = true;
             $_SESSION['role'] = $row['role'];
+            $_SESSION['firstName'] = $row['firstName'];
+            $_SESSION['lastName'] = $row['lastName'];
 
             if ($row['role'] === 'Admin') {
                 header("Location: admin.php");

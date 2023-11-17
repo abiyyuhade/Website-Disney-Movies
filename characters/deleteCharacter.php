@@ -3,7 +3,7 @@ include "../inc/functions.php";
 
 $id = $_GET['id'];
 
-if(deleteCaster($id) > 0) {
+if(deleteCharacter($id) > 0) {
     echo "
         <script>
         alert('The caster has been successfully deleted!');

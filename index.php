@@ -1,5 +1,11 @@
 <?php
+session_start();
 include "inc/functions.php";
+
+if (isset($_SESSION['signedIn']) && $_SESSION['signedIn'] === true) {
+    $firstName = $_SESSION['firstName'];
+    $lastName = $_SESSION['lastName'];
+}
 
 $movie = query("SELECT * FROM movies");
 ?>
@@ -13,6 +19,10 @@ $movie = query("SELECT * FROM movies");
 
     <title>Document</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -54,7 +64,7 @@ $movie = query("SELECT * FROM movies");
     <div style="height: 8rem; width: 100%; display: flex; justify-content: space-between; align-items: center; position: absolute; top: 0; z-index: 10">
         <img src="assets/images/disney-logo-white.png" alt="" style="height: 4rem; margin-top: 2em; margin-left: 2rem" />
         <div style="display: flex; align-items: center; margin-right: 2rem;">
-            <p style="margin-right: 1em; color: white;">Nama User</p>
+            <p style="margin-right: 1em; color: white;"><?php echo $firstName . ' ' . $lastName; ?></p>
             <a href="signOut.php">Sign Out</a>
         </div>
     </div>
@@ -71,7 +81,7 @@ $movie = query("SELECT * FROM movies");
     <div style="height: 80em; background-color: #474e9c; display: flex; flex-direction: column">
         <div style="display: flex; flex-direction: row-reverse; margin-right: 8em">
             <div style="position: relative; width: 15%">
-                <input type="text" placeholder="Search" style="
+                <input id="searchInput" type="text" placeholder="Search" onkeyup="searchMovies()" style="
                             width: 100%;
                             padding: 10px 30px 10px 10px;
                             border: none;
@@ -92,16 +102,16 @@ $movie = query("SELECT * FROM movies");
         </div>
 
 
-        <div style="display: flex; flex-wrap: wrap; margin-top: 4rem; padding-left: 2rem; padding-right: 2rem">
+        <div style="display: flex; flex-wrap: wrap; margin-top: 4rem; padding-left: 2rem; padding-right: 2rem" id="movieContainer">
             <?php foreach ($movie as $row) : ?>
-                <div style="width: 12em; height: 22em; margin: 1.5em">
-                    <a href="detail.html">
-                        <div style="height: 18em">
+                <div class="movie" style="width: 12em; height: 22em; margin: 1.5em">
+                    <a href="detail.php?id=<?= $row['id']; ?>">
+                        <div style="height: 17.5em">
                             <img src="assets/upload/images/<?= $row['thumbnail']; ?>" alt="" />
                         </div>
                         <div style="display: flex; flex-direction: column">
-                            <p style="color: white; font-size: 0.875rem"><?= $row['year']; ?></p>
-                            <p style="color: white; font-weight: 500"><?= $row['title']; ?></p>
+                            <p class="movie-year" style="color: white; font-size: 0.875rem"><?= $row['year']; ?></p>
+                            <p class="movie-title" style="color: white; font-weight: 500"><?= $row['title']; ?></p>
                         </div>
                     </a>
                 </div>
@@ -178,6 +188,28 @@ $movie = query("SELECT * FROM movies");
             <p style="color: white; font-weight: bold; margin-left: 0.5rem; margin-right: 0.5rem">&lt Previous</p>
         </div>
     </div>
+    <footer style="height: 75px; display: flex; align-items:center; justify-content:flex-start;">
+        <p style="margin-left: 50px; font-weight: bold;">&copy; 2023, Disney</p>
+    </footer>
+
+    <script>
+        function searchMovies() {
+            let input, filter, cards, cardContainer, title, i;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            cardContainer = document.getElementById('movieContainer');
+            cards = cardContainer.getElementsByClassName('movie');
+
+            for (i = 0; i < cards.length; i++) {
+                title = cards[i].querySelector('.movie-title');
+                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

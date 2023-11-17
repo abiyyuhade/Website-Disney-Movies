@@ -3,12 +3,12 @@ include "../inc/functions.php";
 
 $id = $_GET['id'];
 
-$data = query("SELECT * FROM casters WHERE id = $id")[0];
+$data = query("SELECT * FROM characters WHERE id = $id")[0];
 
 $movie = query("SELECT id, title FROM movies");
 
 if(isset($_POST['editCaster'])) {
-    if(editCaster($_POST) > 0) {
+    if(editCharacter($_POST) > 0) {
         echo "
             <script>
             alert('The caster has been successfully updated!');

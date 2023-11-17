@@ -14,7 +14,7 @@ if ($_SESSION['role'] !== 'Admin') {
 
 $movie = query("SELECT * FROM movies");
 
-$caster = query("SELECT casters.*, movies.title AS movie_title FROM casters LEFT JOIN movies ON casters.id_movies = movies.id");
+$character = query("SELECT characters.*, movies.title AS movie_title FROM characters LEFT JOIN movies ON characters.id_movies = movies.id");
 
 ?>
 
@@ -65,8 +65,8 @@ $caster = query("SELECT casters.*, movies.title AS movie_title FROM casters LEFT
         <?php endforeach; ?>
     </table><br><br>
 
-    <h3>Table Casters</h3>
-    <a href="caster/addCaster.php">Add Data</a><br><br>
+    <h3>Table Characters</h3>
+    <a href="characters/addCharacter.php">Add Data</a><br><br>
     <table>
         <tr>
             <th>No.</th>
@@ -77,7 +77,7 @@ $caster = query("SELECT casters.*, movies.title AS movie_title FROM casters LEFT
         </tr>
 
         <?php $i = 1; ?>
-        <?php foreach ($caster as $row) : ?>
+        <?php foreach ($character as $row) : ?>
             <tr>
                 <td><?= $i; ?></td>
                 <td><?= $row['name']; ?></td>
@@ -86,8 +86,8 @@ $caster = query("SELECT casters.*, movies.title AS movie_title FROM casters LEFT
                     <img src="assets/upload/images/<?= $row['picture'] ?>" width="75">
                 </td>
                 <td>
-                    <a href="caster/editCaster.php?id=<?= $row['id']; ?>">Edit</a> |
-                    <a href="caster/deleteCaster.php?id=<?= $row['id']; ?>" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a href="characters/editCharacter.php?id=<?= $row['id']; ?>">Edit</a> |
+                    <a href="characters/deleteCharacter.php?id=<?= $row['id']; ?>" onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>
             <?php $i++; ?>

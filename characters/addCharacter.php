@@ -4,10 +4,10 @@ include "../inc/functions.php";
 $movie = query("SELECT id, title FROM movies");
 
 if(isset($_POST['addCaster'])) {
-    if(addCaster($_POST) > 0) {
+    if(addCharacter($_POST) > 0) {
         echo "
             <script>
-                alert('Successfully Create a New Caster');
+                alert('Successfully Create a New Character');
                 document.location.href = '../admin.php';
             </script>
         ";
@@ -27,7 +27,7 @@ if(isset($_POST['addCaster'])) {
 </head>
 
 <body>
-    <h1>Add Data Caster</h1>
+    <h1>Add Data Character</h1>
     <form action="" method="post" enctype="multipart/form-data">
         <!-- Mame -->
         <label for="name">Name</label>

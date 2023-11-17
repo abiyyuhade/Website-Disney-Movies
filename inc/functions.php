@@ -19,8 +19,8 @@ function query($query) {
 function signUp($data) {
     global $conn;
 
-    $firstName = $data['firstName'];
-    $lastName = $data['lastName'];
+    $firstName = ucfirst($data['firstName']);
+    $lastName = ucfirst($data['lastName']);
     $email = $data['email'];
     $password = mysqli_real_escape_string($conn, $data['password']);
     $confPassword = mysqli_real_escape_string($conn, $data['confPassword']);
@@ -240,7 +240,7 @@ function deleteMovie($id) {
     return mysqli_affected_rows($conn);
 }
 
-function addCaster($data) {
+function addCharacter($data) {
     global $conn;
 
     $name = $data['name'];
@@ -251,7 +251,7 @@ function addCaster($data) {
         return false;
     }
 
-    $query = "INSERT INTO casters (name, picture, id_movies) VALUES  ('$name', '$picture' , '$movie')";
+    $query = "INSERT INTO characters (name, picture, id_movies) VALUES  ('$name', '$picture' , '$movie')";
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
@@ -304,7 +304,7 @@ function uploadPicture() {
 }
 
 
-function editCaster($data) {
+function editCharacter($data) {
     global $conn;
 
     $id = $data['id'];
@@ -317,25 +317,26 @@ function editCaster($data) {
             return false;
         }
     } else {
-        $result = query("SELECT picture FROM casters WHERE id = '$id'");
+        $result = query("SELECT picture FROM characters WHERE id = '$id'");
         $picture = $result[0]['picture'];
     }
 
-    $query = "UPDATE casters SET name = '$name', id_movies = $movie, picture = '$picture' WHERE id = '$id'";
+    $query = "UPDATE characters SET name = '$name', id_movies = $movie, picture = '$picture' WHERE id = '$id'";
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
 }
 
-function deleteCaster($id) {
+function deleteCharacter($id) {
     global $conn;
+
     $id = mysqli_real_escape_string($conn, $id);
 
-    $file = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM casters WHERE id='$id'"));
+    $file = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM characters WHERE id='$id'"));
 
     unlink('../assets/upload/images/' . $file["picture"]);
 
-    $delete = "DELETE FROM casters WHERE id = $id";
+    $delete = "DELETE FROM characters WHERE id = $id";
     mysqli_query($conn, $delete);
 
     return mysqli_affected_rows($conn);
