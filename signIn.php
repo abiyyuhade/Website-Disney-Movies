@@ -79,6 +79,7 @@ if (isset($_POST['signIn'])) {
             border: solid 2px #ffffff;
             height: 3rem;
             padding-left: 1rem;
+            color: white;
         }
 
         .text3 {
@@ -117,7 +118,7 @@ if (isset($_POST['signIn'])) {
                     <div class="text1">Welcome Back!</div>
                     <p class="text2">Sign in for timeless tales and magical wonders.</p>
                     <p class="text3">Email</p>
-                    <input type="text" class="inputs" name="email" placeholder="Input your email" />
+                    <input type="text" class="inputs" name="email" placeholder="Input your email" autocomplete="off" required />
                     <p class="text3">Password</p>
                     <input type="password" class="inputs" name="password" placeholder="Password" />
                     <button class="button1" name="signIn">Sign In</button>
