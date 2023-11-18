@@ -195,15 +195,14 @@ $movie = query("SELECT * FROM movies");
 
     <script>
         function searchMovies() {
-            let input, filter, cards, cardContainer, title, i;
+            let input, filter, cards, title, i;
             input = document.getElementById('searchInput');
             filter = input.value.toUpperCase();
-            cardContainer = document.getElementById('movieContainer');
-            cards = cardContainer.getElementsByClassName('movie');
+            cards = document.querySelectorAll('#movieList .movie');
 
             for (i = 0; i < cards.length; i++) {
                 title = cards[i].querySelector('.movie-title');
-                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                if (title.textContent.toUpperCase().indexOf(filter) > -1) {
                     cards[i].style.display = "";
                 } else {
                     cards[i].style.display = "none";
