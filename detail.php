@@ -30,11 +30,13 @@ foreach ($charactersData as $character) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             margin: 0;
             padding: 0;
         }
+
         body {
             margin: 0;
             padding: 0;
@@ -84,9 +86,12 @@ foreach ($charactersData as $character) {
             background-position: center; 
             display: flex; 
             justify-content: center">
-            <div style="display: flex; align-items: center; margin-top: 2rem; margin-right: 2rem; position: absolute; top: 10px; right: 10px; z-index: 10;">
-                <p style="margin-right: 1em; color: white;"><?php echo $firstName . ' ' . $lastName; ?></p>
-                <a href="signOut.php">Sign Out</a>
+            <div style="left: 0%; display: flex; align-items: center; margin-top: 2rem; margin-right: 2rem; position: absolute; top: 10px; right: 10px; z-index: 10; justify-content:space-between;">
+                <button onclick="goBack()" style="margin-left: 20px;"><i style="color: white; font-size: 20px;" class="fa-solid fa-left-long"></i></button>
+                <div style="display: flex; align-items:center;">
+                    <p style="margin-right: 1em; color: white;"><?php echo $firstName . ' ' . $lastName; ?></p>
+                    <a href="signOut.php">Sign Out</a>
+                </div>
             </div>
             <div style="position: absolute; 
                 top: 0; 
@@ -181,9 +186,15 @@ foreach ($charactersData as $character) {
             </div>
         <?php endforeach; ?>
         </div>
-         <footer style="width: 100%; background-color: white; height: 75px; display: flex; align-items:center; justify-content:flex-start;">
+        <footer style="width: 100%; background-color: white; height: 75px; display: flex; align-items:center; justify-content:flex-start;">
             <p style="margin-left: 50px; font-weight: bold;">&copy; 2023, Disney</p>
         </footer>
+
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
 </body>
 
 </html>
