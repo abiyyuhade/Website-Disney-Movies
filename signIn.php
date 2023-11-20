@@ -18,7 +18,7 @@ if (isset($_POST['signIn'])) {
             $_SESSION['lastName'] = $row['lastName'];
 
             if ($row['role'] === 'Admin') {
-                header("Location: admin.php");
+                header("Location: adminHomepage.php");
             } else {
                 header("Location: index.php");
             }

@@ -2,6 +2,11 @@
 session_start();
 include "inc/functions.php";
 
+if (!isset($_SESSION['signedIn'])) {
+    header("Location: signIn.php");
+    exit;
+}
+
 if (isset($_SESSION['signedIn']) && $_SESSION['signedIn'] === true) {
     $firstName = $_SESSION['firstName'];
     $lastName = $_SESSION['lastName'];

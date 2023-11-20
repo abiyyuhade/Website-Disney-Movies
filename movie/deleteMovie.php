@@ -7,7 +7,7 @@ if(deleteMovie($id) > 0) {
     echo "
         <script>
         alert('The movie has been successfully deleted!');
-        document.location.href = '../admin.php';
+        document.location.href = '../adminMovie.php';
         </script>
         ";
 } else {

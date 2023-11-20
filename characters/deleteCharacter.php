@@ -7,7 +7,7 @@ if(deleteCharacter($id) > 0) {
     echo "
         <script>
         alert('The caster has been successfully deleted!');
-        document.location.href = '../admin.php';
+        document.location.href = '../adminCharacter.php';
         </script>
         ";
 } else {
